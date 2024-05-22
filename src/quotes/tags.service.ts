@@ -11,17 +11,20 @@ export const upsertTags = async (tags: string[]) => {
     const existingNames = existingTags.map(tag => tag.name)
     const existingIDs = existingTags.map(tag => tag.id)
 
+    // 2. should only create tags that do not already exist
     const createdCount = await tx.tag.createMany({
       data: tags
         .filter(tag => !existingNames.includes(tag))
         .map(tag => ({
           name: tag,
+          // 3. should give new tags random colors
           color: randomColor({ luminosity: 'light' })
         }))
     })
 
     const tagIds = existingTags.map(tag => tag.id)
 
+    // 4. should find and return new tag IDs
     if (createdCount.count) {
       const createdTags = await tx.tag.findMany({
         select: { id: true },
@@ -35,6 +38,8 @@ export const upsertTags = async (tags: string[]) => {
       tagIds.push(...createdIds)
     }
 
+    // 1. should return a list of tag IDs
+    // 5. should return an empty array if no tags are passed
     return tagIds
   })
 }
