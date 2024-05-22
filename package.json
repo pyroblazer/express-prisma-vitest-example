@@ -12,7 +12,13 @@
     "checks:fix": "npm run format && npm run lint",
     "prepare": "husky install",
     "test:unit": "vitest -c ./vitest.config.unit.ts",
-    "test:unit:ui": "vitest -c ./vitest.config.unit.ts --ui"
+    "test:unit:ui": "vitest -c ./vitest.config.unit.ts --ui",
+    "test:int": "./scripts/run-integration.sh",
+    "test:int:ui": "./scripts/run-integration.sh --ui",
+    "test:int:w": ".\\scripts\\run-integration.sh",
+    "test:int:ui:w": ".\\scripts\\run-integration.sh --ui",
+    "generate": "pnpm prisma generate",
+    "migrate": "pnpm prisma migrate"
   },
   "dependencies": {
     "@prisma/client": "^4.11.0",
@@ -31,6 +37,7 @@
     "@types/jsonwebtoken": "^8.5.9",
     "@types/node": "18.11.12",
     "@types/randomcolor": "^0.5.7",
+    "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
     "@vitest/ui": "^1.6.0",
@@ -40,6 +47,7 @@
     "husky": "^8.0.2",
     "prettier": "2.8.1",
     "prisma": "^4.11.0",
+    "supertest": "^7.0.0",
     "ts-node": "10.9.1",
     "tsconfig-paths": "^4.1.1",
     "typescript": "4.9.4",
